@@ -7,3 +7,11 @@ riderModule.iml
 .idea
 .git
 /Properties
+*.vsidx
+/.vs/FullStackTechTest/v17/.suo
+/.vs/FullStackTechTest/v17/.wsuo
+/.vs/FourteenFish/v17/.wsuo
+/.vs/FullStackTechTest/v17/DocumentLayout.json
+/.vs/ProjectEvaluation/fullstacktechtest.metadata.v8.bin
+/.vs/ProjectEvaluation/fullstacktechtest.projects.v8.bin
+/.vs/ProjectEvaluation/fullstacktechtest.strings.v8.bin
