@@ -1,0 +1,21 @@
+﻿@model FullStackTechTest.Models.Import.IndexViewModel
+@{
+    ViewData["Title"] = "Import Page";
+}
+
+<div class="container">
+    Import JSON Data in the format: 
+    <br />"firstName": "",
+    <br />"lastName": "",
+    <br />"GMC": ,
+    <br />"address": [
+    <br />{
+    <br />"line1": "",
+    <br />"city": "",
+    <br />"postcode": ""
+    <br />}
+    <br />]
+    <a class="btn btn-primary" href="@Url.Action("Import","YourController")">Import JSON</a>
+
+
+</div>
