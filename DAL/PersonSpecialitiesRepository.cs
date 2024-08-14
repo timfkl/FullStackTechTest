@@ -16,8 +16,8 @@ namespace DAL
             var personSpecialities = new List<PersonSpecialities>();
 
             var sql = new StringBuilder();
-            sql.AppendLine("SELECT * FROM PersonSpecialities");
-            sql.AppendLine("WHERE PersonId = @personId");
+            sql.AppendLine("SELECT * FROM PersonSpecialities JOIN Speciality WHERE PersonSpecialities.SpecialityId = Speciality.Id ");
+            sql.AppendLine("AND PersonId = @personId");
 
             await using (var connection = new MySqlConnection(Config.DbConnectionString))
             {
@@ -64,6 +64,7 @@ namespace DAL
                 Id = int.Parse(data["Id"].ToString()),
                 PersonId = int.Parse(data["PersonId"].ToString()),
                 SpecialityId = int.Parse(data["SpecialityId"].ToString()),
+                SpecialityName = data["SpecialityName"].ToString(),
             };
             return personSpecialities;
         }

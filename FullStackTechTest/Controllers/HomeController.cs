@@ -11,12 +11,14 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly IPersonRepository _personRepository;
     private readonly IAddressRepository _addressRepository;
+    private readonly IPersonSpecialitiesRepository _personSpecialitiesRepository;
 
-    public HomeController(ILogger<HomeController> logger, IPersonRepository personRepository, IAddressRepository addressRepository)
+    public HomeController(ILogger<HomeController> logger, IPersonRepository personRepository, IAddressRepository addressRepository, IPersonSpecialitiesRepository personSpecialitiesRepository)
     {
         _logger = logger;
         _personRepository = personRepository;
         _addressRepository = addressRepository;
+        _personSpecialitiesRepository = personSpecialitiesRepository;
     }
 
     public async Task<IActionResult> Index()
@@ -27,13 +29,13 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Details(int id)
     {
-        var model = await DetailsViewModel.CreateAsync(id, false, _personRepository, _addressRepository);
+        var model = await DetailsViewModel.CreateAsync(id, false, _personRepository, _addressRepository, _personSpecialitiesRepository);
         return View(model);
     }
 
     public async Task<IActionResult> Edit(int id)
     {
-        var model = await DetailsViewModel.CreateAsync(id, true, _personRepository, _addressRepository);
+        var model = await DetailsViewModel.CreateAsync(id, true, _personRepository, _addressRepository, _personSpecialitiesRepository);
         return View("Details", model);
     }
 
