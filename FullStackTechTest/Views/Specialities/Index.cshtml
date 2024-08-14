@@ -1,0 +1,24 @@
+﻿@model FullStackTechTest.Models.Specialities.IndexViewModel
+
+@{
+    ViewData["Title"] = "Specialities Page";
+}
+<div class="container">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Speciality</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var speciality in Model.SpecialityList)
+            {
+                <tr class="clickable-row" data-href="@Url.Action("Details", new { id = speciality.Id })">
+                    <td>@speciality.Id</td>
+                    <td>@speciality.SpecialityName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
