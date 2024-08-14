@@ -1,9 +1,9 @@
 ﻿namespace Models
 {
-    public class DoctorSpecialities
+    public class PeopleSpecialities
     {
         public int Id { get; set; }
-        public int GMC { get; set; }
+        public int PersonId { get; set; }
         public int SpecialityId {  get; set; }
     }
 }

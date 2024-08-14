@@ -1,7 +1,7 @@
-CREATE TABLE DoctorSpecialities(
+CREATE TABLE PeopleSpecialities(
 	Id INT PRIMARY KEY auto_increment,
-    GMC INT,
-    SpecialityId INT
+    PersonId INT NOT NULL,
+    SpecialityId INT NOT NULL
 );
 
 CREATE TABLE Specialities(
