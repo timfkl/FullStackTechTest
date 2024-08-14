@@ -1,6 +1,6 @@
 ﻿namespace Models
 {
-    public class PeopleSpecialities
+    public class PersonSpecialities
     {
         public int Id { get; set; }
         public int PersonId { get; set; }
