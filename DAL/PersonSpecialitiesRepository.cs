@@ -9,17 +9,17 @@ namespace DAL
 {
     public class PersonSpecialitiesRepository : IPersonSpecialitiesRepository
     {
-        public Task<PersonSpecialities> GetForPersonIdAsync(int personId)
+        public async Task<PersonSpecialities> GetForPersonIdAsync(int personId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<PersonSpecialities>> ListAllAsync()
+        public async Task<List<PersonSpecialities>> ListAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task SaveAsync(PersonSpecialities personSpecialities)
+        public async Task SaveAsync(PersonSpecialities personSpecialities)
         {
             throw new NotImplementedException();
         }
