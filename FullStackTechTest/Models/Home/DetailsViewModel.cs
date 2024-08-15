@@ -16,7 +16,7 @@ public class DetailsViewModel
         {
             Person = await personRepository.GetByIdAsync(personId),
             Address = await addressRepository.GetForPersonIdAsync(personId),
-            PersonSpecialitiesList = await personSpecialitiesRepository?.ListForPersonIdAsync(personId),
+            PersonSpecialitiesList = await personSpecialitiesRepository.ListForPersonIdAsync(personId),
             IsEditing = isEditing
         };
         return model;
