@@ -74,6 +74,23 @@ namespace DAL
             }
         }
 
+        public async Task DeleteAsync(Speciality speciality)
+        {
+            var sql = new StringBuilder();
+            sql.AppendLine("DELETE speciality, personspecialities FROM speciality sp LEFT JOIN personspecialities pesp ON sp.Id = pesp.SpecialityId");
+            sql.AppendLine("WHERE sp.Id = @specialityId");
+
+            await using (var connection = new MySqlConnection(Config.DbConnectionString))
+            {
+                await connection.OpenAsync();
+
+                var command = new MySqlCommand(sql.ToString(), connection);
+                command.Parameters.AddWithValue("specialityId", speciality.Id);
+
+                await command.ExecuteNonQueryAsync();
+            }
+        }
+
         private Speciality PopulateSpeciality(IDataRecord data)
         {
             var speciality = new Speciality
