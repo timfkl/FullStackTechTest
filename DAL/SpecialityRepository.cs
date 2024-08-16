@@ -59,7 +59,7 @@ namespace DAL
         {
             var sql = new StringBuilder();
             sql.AppendLine("UPDATE speciality SET");
-            sql.AppendLine("SpecialityName = @specialityName,");
+            sql.AppendLine("SpecialityName = @specialityName");
             sql.AppendLine("WHERE Id = @specialityId");
 
             await using (var connection = new MySqlConnection(Config.DbConnectionString))
