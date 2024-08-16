@@ -17,6 +17,12 @@ a {
   border-color: #1861ac;
 }
 
+.btn-ternary {
+    color: #fff;
+    background-color: #ff0000;
+    border-color: #e21102;
+}
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
