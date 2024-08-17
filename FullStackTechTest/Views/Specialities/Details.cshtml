@@ -33,6 +33,7 @@
         {
             <div>
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a href="@Html Url.Action("Delete", new { id = Model.Speciality.Id })" role="button" value="Delete" class="btn btn-primary" style="background-color: #ff0000" /><!--Temporarily using inline styling-->
             </div>
         }
     }
