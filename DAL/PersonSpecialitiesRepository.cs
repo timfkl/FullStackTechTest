@@ -36,8 +36,10 @@ namespace DAL
             return personSpecialities;
         }
 
-        public async Task SaveAsync(PersonSpecialities personSpecialities)
+        public async Task SaveAsync(List<PersonSpecialities> personSpecialities)
         {
+            var addSpecialities = new PersonSpecialities();
+            var removeSpecialities = new PersonSpecialities();
             var sql = new StringBuilder();
             sql.AppendLine("UPDATE PersonSpecialities SET");
             sql.AppendLine("PersonId = @personId,");
@@ -49,9 +51,9 @@ namespace DAL
                 await connection.OpenAsync();
 
                 var command = new MySqlCommand(sql.ToString(), connection);
-                command.Parameters.AddWithValue("personId", personSpecialities.PersonId);
-                command.Parameters.AddWithValue("lastName", personSpecialities.SpecialityId);
-                command.Parameters.AddWithValue("personId", personSpecialities.Id);
+                //command.Parameters.AddWithValue("personId", personSpecialities.PersonId);
+                //command.Parameters.AddWithValue("lastName", personSpecialities.SpecialityId);
+                //command.Parameters.AddWithValue("personId", personSpecialities.Id);
 
                 await command.ExecuteNonQueryAsync();
             }

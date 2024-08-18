@@ -12,13 +12,15 @@ public class HomeController : Controller
     private readonly IPersonRepository _personRepository;
     private readonly IAddressRepository _addressRepository;
     private readonly IPersonSpecialitiesRepository _personSpecialitiesRepository;
+    private readonly ISpecialityRepository _specialityRepository;
 
-    public HomeController(ILogger<HomeController> logger, IPersonRepository personRepository, IAddressRepository addressRepository, IPersonSpecialitiesRepository personSpecialitiesRepository)
+    public HomeController(ILogger<HomeController> logger, IPersonRepository personRepository, IAddressRepository addressRepository, IPersonSpecialitiesRepository personSpecialitiesRepository, ISpecialityRepository specialityRepository)
     {
         _logger = logger;
         _personRepository = personRepository;
         _addressRepository = addressRepository;
         _personSpecialitiesRepository = personSpecialitiesRepository;
+        _specialityRepository = specialityRepository;
     }
 
     public async Task<IActionResult> Index()
@@ -29,13 +31,13 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Details(int id)
     {
-        var model = await DetailsViewModel.CreateAsync(id, false, _personRepository, _addressRepository, _personSpecialitiesRepository);
+        var model = await DetailsViewModel.CreateAsync(id, false, _personRepository, _addressRepository, _personSpecialitiesRepository, _specialityRepository);
         return View(model);
     }
 
     public async Task<IActionResult> Edit(int id)
     {
-        var model = await DetailsViewModel.CreateAsync(id, true, _personRepository, _addressRepository, _personSpecialitiesRepository);
+        var model = await DetailsViewModel.CreateAsync(id, true, _personRepository, _addressRepository, _personSpecialitiesRepository, _specialityRepository);
         return View("Details", model);
     }
 
@@ -44,6 +46,8 @@ public class HomeController : Controller
     {
         await _personRepository.SaveAsync(model.Person);
         await _addressRepository.SaveAsync(model.Address);
+        await _personSpecialitiesRepository.SaveAsync(model.PersonSpecialitiesList);
+        
         return RedirectToAction("Details", new { id = model.Person.Id });
     }
 
