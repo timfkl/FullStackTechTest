@@ -111,7 +111,7 @@ public class PersonRepository : IPersonRepository
         }
     }
 
-    public async Task<Person> CheckGMCAsync(int gmc)
+    public async Task<bool> CheckGMCAsync(int gmc)
     {
         var person = new Person();
 
@@ -127,13 +127,9 @@ public class PersonRepository : IPersonRepository
             command.Parameters.AddWithValue("gmc", gmc);
 
             var reader = await command.ExecuteReaderAsync();
-            if (await reader.ReadAsync())
-            {
-                person = PopulatePerson(reader);
-            }
+            return await reader.ReadAsync();
         }
 
-        return person;
     }
 
     private Person PopulatePerson(IDataRecord data)
