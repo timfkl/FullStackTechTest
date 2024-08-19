@@ -78,6 +78,60 @@ public class PersonRepository : IPersonRepository
         }
     }
 
+    public async Task CreateAsync(Person person)
+    {
+        //Add way to prevent duplicate GMC from being added
+        var sql = new StringBuilder();
+        sql.AppendLine("INSERT INTO people (FirstName, LastName, GMC)");
+        sql.AppendLine("VALUES (@firstName, @lastName, @gmc)"); 
+
+
+        await using (var connection = new MySqlConnection(Config.DbConnectionString))
+        {
+            await connection.OpenAsync();
+
+            var command = new MySqlCommand(sql.ToString(), connection);
+            command.Parameters.AddWithValue("firstName", person.FirstName);
+            command.Parameters.AddWithValue("lastName", person.LastName);
+            command.Parameters.AddWithValue("gmc", person.GMC);
+
+            await command.ExecuteNonQueryAsync();
+        }
+
+    }
+
+    public async Task ImportAsync(List<Person> people)
+    {
+        //Create en masse
+        var sql = new StringBuilder();
+        sql.AppendLine("INSERT INTO people (FirstName, LastName, GMC) VALUES");
+        foreach (var person in people) {
+            //Append (var1,var2,var3), for each person in a way that can be mapped to the variables
+
+        }
+    }
+
+    public async Task<bool> CheckGMCAsync(int gmc)
+    {
+        var person = new Person();
+
+        var sql = new StringBuilder();
+        sql.AppendLine("SELECT * FROM people");
+        sql.AppendLine("WHERE GMC = @gmc");
+
+        await using (var connection = new MySqlConnection(Config.DbConnectionString))
+        {
+            await connection.OpenAsync();
+
+            var command = new MySqlCommand(sql.ToString(), connection);
+            command.Parameters.AddWithValue("gmc", gmc);
+
+            var reader = await command.ExecuteReaderAsync();
+            return await reader.ReadAsync();
+        }
+
+    }
+
     private Person PopulatePerson(IDataRecord data)
     {
         var person = new Person
