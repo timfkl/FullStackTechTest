@@ -51,6 +51,43 @@
             <label>Postcode:</label>
             <input type="text" name="address.postcode" value="@Model.Address.Postcode" class="@(Model.IsEditing ? "form-control" : "form-control-plaintext")" @(Model.IsEditing ? "" : "readonly")/>
         </div>
+        <div>
+            @if (!Model.IsEditing)
+            {
+                <h4>Specialities</h4>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>SpecialityId</th>
+                            <th>SpecialityName</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var personSpeciality in Model.PersonSpecialitiesList)
+                        {
+                            <tr>
+                                <td>@personSpeciality.SpecialityId</td>
+                                <td>@personSpeciality.SpecialityName</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <fieldset>
+                    <legend>Choose Specialities</legend>
+                    @foreach (var speciality in Model.SpecialityList)
+                    {
+                        <div>
+                            <input type="checkbox" id="speciality_@speciality.Id" name="speciality" value="speciality_@speciality.Id" checked="@Model.PersonHasSpeciality(speciality)" />
+                            <label for="speciality_@speciality.Id">@speciality.SpecialityName</label>
+                        </div>
+                    }
+
+                </fieldset>
+            }
+        </div>
         
         @if (Model.IsEditing)
         {
